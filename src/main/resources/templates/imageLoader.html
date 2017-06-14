@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: site-head">
+    <title id="pageTitle">Image</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+<h1>Load new image</h1>
+
+<form action="#" th:action="@{/ui/image/upload}" method="post" enctype="multipart/form-data">
+    <input type="file" name="files" th:multiple="multiple"/>
+    <input type="submit" />
+</form>
+<footer th:replace="fragments/layout :: site-footer"/>
+</body>
+</html>

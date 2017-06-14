@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: site-head">
+    <title id="pageTitle">Offers</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="offerItem : ${offerList}">
+        <td th:text="${offerItem.id}"></td>
+        <td th:text="${offerItem.name}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="fragments/layout :: site-footer"/>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: site-head">
+    <title id="pageTitle">Recommendation Engine</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>FirstName LastName</th>
+        <th>Tags</th>
+        <th>Simple Match</th>
+        <th>Similar Users</th>
+        <th>R.E. Places</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userItem : ${userDetails}">
+        <td th:text="${userItem.Id}"></td>
+        <td th:text="${userItem.firstName + ' ' + userItem.lastName}"></td>
+        <td th:text="${userItem.getTagNames()}"></td>
+        <td>
+            <span th:each="map, iterStat : ${simpleMatchPlaces}">
+                <a th:href="@{|/ui/places/details/${map.key.id}|}"
+                   th:text="!${iterStat.last} ? ${map.key.name} + ' (' + ${map.value} + ')' + ',': ${map.key.name} + ' (' + ${map.value} + ')'">
+                </a>
+            </span>
+        </td>
+        <td>
+            <span th:each="map, iterStat : ${similarUsers}">
+                <a th:href="@{|/ui/users/details/${map.key.id}|}"
+                   th:text="!${iterStat.last} ? ${map.key.login} + ' (' + ${map.value} + ')' + ',': ${map.key.login} + ' (' + ${map.value} + ')'">
+                </a>
+            </span>
+        </td>
+        <td>
+            <span th:each="map, iterStat : ${places}">
+                <a th:href="@{|/ui/places/details/${map.key.id}|}"
+                   th:text="!${iterStat.last} ? ${map.key.name} + ' (' + ${map.value.getLeft()} + ', ' + ${map.value.getRight()} + ')' + ',': ${map.key.name} + ' (' + ${map.value.getLeft()} + ', ' + ${map.value.getRight()} + ')'">
+                </a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="fragments/layout :: site-footer"/>
+</body>
+</html>

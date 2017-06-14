@@ -1,0 +1,37 @@
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+# vscode
+.vscode
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+swagger/
+nbdist/
+.nb-gradle/
+
+# maven
+target
+
+# Gradle
+.gradle
+build
+
+.profile
+.DS_Store
+.Pythongit status
+
+### Elastic ###
+data

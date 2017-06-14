@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: site-head">
+    <title id="pageTitle">Place Details</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Cuisine</th>
+        <th>Location</th>
+        <th>Tags</th>
+        <th>Users recommend</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="placeItem : ${placeDetails}">
+        <td th:text="${placeItem.id}"></td>
+        <td th:text="${placeItem.name}"></td>
+        <td>
+            <span th:each="detail, iterStat : ${placeItem.placeDetails}">
+                <span th:text="!${iterStat.last} ? ${detail.name} + ' [' + ${detail.placeDetailType} + ']' + ',': ${detail.name} + ' [' + ${detail.placeDetailType}"></span>
+            </span>
+        </td>
+        <td>
+            <span th:each="detail, iterStat : ${placeItem.placeDetails.?[placeDetailType.type == 'CUISINE']}">
+                <span th:text="!${iterStat.last} ? ${detail.name} + ',': ${detail.name}"></span>
+            </span>
+        </td>
+        <td th:text="${placeItem.latitude+ ', ' + placeItem.longtitude}"></td>
+        <td>
+            <span th:each="tag, iterStat : ${placeItem.tags}">
+                <span th:text="!${iterStat.last} ? '#' + ${tag.name} + ' [' + ${tag.type} + ']' + ',': '#' + ${tag.name} + ' [' + ${tag.type} + ']'"></span>
+            </span>
+        </td>
+        <td>
+            <span th:each="user, iterStat : ${users}">
+                <a th:href="@{|/ui/users/details/${user.id}|}"
+                   th:text="!${iterStat.last} ? ${user.login} + ',': ${user.login}">
+                </a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="fragments/layout :: site-footer"/>
+</body>
+</html>

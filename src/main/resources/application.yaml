@@ -1,0 +1,165 @@
+spring:
+  profiles.active: prod
+---
+
+spring:
+    profiles: prod
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            data-source-class-name: org.mariadb.jdbc.MySQLDataSource
+            jdbc-url: jdbc:mysql://10.8.0.1:3306/eat_dev?autoReconnect=true&useSSL=false
+            username: root
+            password: EatSmetner123
+    jpa:
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            hibernate.format_sql: true
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.enable_lazy_load_no_trans: true
+    data:
+        elasticsearch:
+          cluster-name: eat-cluster
+          cluster-nodes: 10.8.0.1:9300
+          repositories:
+            enabled: true
+        mongodb:
+          name: eat
+          net:
+            bindIp: 10.8.0.1
+            port: 27017
+          setParameter:
+              enableLocalhostAuthBypass: false
+server:
+    port: 8080
+
+tasks:
+    weather:
+        schedule: "0 0 0/1 * * ?"
+
+logging:
+    level:
+        root: warn
+        org.springframework.web: error
+        org.hibernate: error
+        org.springframework.data.mongodb.core.MongoTemplate: error
+        org.springframework.data.mongodb.repository.MongoRepository: error
+        org.springframework.data.mongodb.core.index: off
+---
+
+spring:
+  profiles: dev
+  datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+          data-source-class-name: org.mariadb.jdbc.MySQLDataSource
+          jdbc-url: jdbc:mysql://localhost:3306/eat?autoReconnect=true&useSSL=false
+          username: root
+          password: root
+  jpa:
+      show-sql: true
+      hibernate:
+          ddl-auto: update
+      properties:
+          hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hibernate.format_sql: true
+          hibernate.cache.use_second_level_cache: false
+          hibernate.cache.use_query_cache: false
+          hibernate.generate_statistics: true
+          hibernate.enable_lazy_load_no_trans: true
+  data:
+    elasticsearch:
+      cluster-name: eat-cluster
+      cluster-nodes: localhost:9300
+      repositories:
+        enabled: true
+    mongodb:
+      name: eat
+      net:
+        bindIp: 127.0.0.1
+        port: 27017
+      setParameter:
+        enableLocalhostAuthBypass: false
+server:
+  port: 8090
+tasks:
+    weather:
+      schedule: "0 0 0/1 * * ?"
+logging:
+    level:
+        root: warn
+        org.springframework.web: error
+        org.hibernate: error
+        org.springframework.data.mongodb.core.MongoTemplate: debug
+        org.springframework.data.mongodb.repository.MongoRepository: debug
+        org.springframework.data.mongodb.core.index: off
+---
+
+spring:
+    profiles: dev2
+    data:
+        elasticsearch:
+          cluster-name: eat-cluster
+          cluster-nodes: localhost:9300
+          repositories:
+            enabled: true
+        mongodb:
+          name: eat
+          net:
+            bindIp: 127.0.0.1
+            port: 27017
+          setParameter:
+              enableLocalhostAuthBypass: false
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            data-source-class-name: org.mariadb.jdbc.MySQLDataSource
+            jdbc-url: jdbc:mysql://localhost:3306/eat?autoReconnect=true&useSSL=false
+            username: root
+            password: loaduser5
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            hibernate.format_sql: true
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.enable_lazy_load_no_trans: true
+server:
+    port: 8080
+tasks:
+    weather:
+      schedule: "0 0 0/1 * * ?"
+logging:
+    level:
+#        root: debug
+#        org.springframework.web: debug
+#        org.hibernate: debug
+        org.springframework.data.mongodb.core.MongoTemplate: debug
+        org.springframework.data.mongodb.repository.MongoRepository: debug
+        org.springframework.data.mongodb.core.index: off
+---
+
+spring:
+  profiles: test
+server:
+  port: 8090
+datasource:
+    platform: h2
+    url: jdbc:h2:mem:/eat
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+h2:
+    console:
+      enabled: true
+      path: /console
+---

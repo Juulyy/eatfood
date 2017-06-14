@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-left" th:fragment="header">
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="../welcome.html" th:href="@{/ui/}">Welcome</a></li>
+            <li><a href="../users.html" th:href="@{/ui/users/show-all}">Users</a></li>
+            <li><a href="../places.html" th:href="@{/ui/places/show-all}">Places</a></li>
+            <li><a href="../imageLoader.html" th:href="@{/ui/image}">Image</a></li>
+            <li><a href="/swagger/index.html" th:href="@{/swagger-ui.html}">Documentation</a></li>
+            <li><a href="../login.html" th:href="@{/ui/logout}">Logout</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

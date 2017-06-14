@@ -1,0 +1,11 @@
+{
+  "num_of_users": 10,
+  "data_model": {
+    "cache": {
+      "weight": "100m"
+    }
+  },
+  "index_info": {
+    "index": "eat"
+  }
+}

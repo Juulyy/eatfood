@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: site-head">
+    <title id="pageTitle">Places</title>
+</head>
+<body>
+<header th:replace="fragments/header :: header"/>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="placeItem : ${placeList}">
+        <td th:text="${placeItem.id}">Id</td>
+        <td>
+            <a th:href="@{|/ui/places/details/${placeItem.id}|}"
+               th:text="${placeItem.name}">
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="fragments/layout :: site-footer"/>
+</body>
+</html>

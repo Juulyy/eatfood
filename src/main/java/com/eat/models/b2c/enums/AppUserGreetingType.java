@@ -1,0 +1,8 @@
+package com.eat.models.b2c.enums;
+
+public enum AppUserGreetingType {
+
+    BIRTHDAY, RETURN_AFTER_7, RETURN_AFTER_14, RETURN_AFTER_30, SPECIFIC, GENERAL, GREETING_DEFAULT,
+    CONTEXT_SPECIFIC, CONTEXT_DEFAULT
+
+}

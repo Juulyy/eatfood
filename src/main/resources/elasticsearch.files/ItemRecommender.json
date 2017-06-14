@@ -1,0 +1,42 @@
+{
+  "num_of_items": 10,
+  "max_duration": 120,
+  "data_model": {
+    "class": "org.codelibs.elasticsearch.taste.model.ElasticsearchDataModel",
+    "scroll": {
+      "size": 1000,
+      "keep_alive": 60
+    },
+    "cache": {
+      "weight": "100m"
+    }
+  },
+  "index_info": {
+    "preference": {
+      "index": "eat",
+      "type": "preference"
+    },
+    "user": {
+      "index": "eat",
+      "type": "user"
+    },
+    "item": {
+      "index": "eat",
+      "type": "item"
+    },
+    "item_similarity": {
+      "index": "eat",
+      "type": "item_similarity"
+    },
+    "field": {
+      "user_id": "user_id",
+      "item_id": "item_id",
+      "value": "value",
+      "items": "items",
+      "timestamp": "@timestamp"
+    }
+  },
+  "similarity": {
+    "factory": "org.codelibs.elasticsearch.taste.similarity.LogLikelihoodSimilarityFactory"
+  }
+}
